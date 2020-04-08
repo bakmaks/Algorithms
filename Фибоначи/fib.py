@@ -48,6 +48,14 @@ def fib(n):
     return n if n <= 1 else fib(n-1) + fib(n-2)
 
 
+def iter_fib(n):
+    assert n >= 0
+    f0, f1 = 0, 1
+    for i in range(n - 1):
+        f0, f1 = f1, f0 + f1
+    return f1
+
+
 print(fib1(8))     # 21
 # Строки вызываются если раскомментировать декоратор @viz у fib1(n) и n <= 5
 # иначе очень большой файл изображения
@@ -73,3 +81,6 @@ fib1 = memo(fib1)
 print(fib1(200))
 
 print(fib(200))
+
+print('iter_fib, n = 8000')
+print(iter_fib(8000))
