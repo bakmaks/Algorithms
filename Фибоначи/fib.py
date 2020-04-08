@@ -1,3 +1,7 @@
+from rcviz import viz
+from PIL import Image
+
+@viz
 def fib1(n: int):
     """
     Простая рекурсивная ф. для вычисления числа Фибоначи.
@@ -9,6 +13,7 @@ def fib1(n: int):
 # Глобальная переменная "cache", что бы при выходе из рекурсии повторно не вычилялись значения n
 cache = {}
 
+@viz
 def fib2(n):
     assert n >= 0
     if n not in cache:
@@ -16,9 +21,15 @@ def fib2(n):
     return cache[n]
 
 
-print(fib1(8))     # 21
+print(fib1(5))     # 21
+image = Image.open('fib1.png')
+image.show()
 
-print(fib2(8))     # 21
+
+print(fib2(5))     # 21
+image1 = Image.open('fib2.png')
+image1.show()
+
 print(fib2(800))
 
 # Превышение глубины рекурсии
