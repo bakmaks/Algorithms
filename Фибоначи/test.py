@@ -18,3 +18,5 @@ def compare(fs, args):
 
 compare([fib, iter_fib], list(range(20)))
 
+compare([iter_fib], list(range(200)))
+
