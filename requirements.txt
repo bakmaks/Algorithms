@@ -1,3 +1,5 @@
 # sudo apt-get install graphviz libgraphviz-dev
+# sudo apt-get install python3-tk
 rcviz
 pillow
+matplotlib
