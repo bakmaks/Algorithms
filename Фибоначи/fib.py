@@ -1,5 +1,6 @@
 from rcviz import viz
 from PIL import Image
+from alg_utils import timed
 
 
 # @viz
@@ -89,3 +90,6 @@ print(fib(200))
 
 print('iter_fib, n = 8000')
 print(iter_fib(8000))
+
+print('Время выполнения функции iter_fib при n=8000:')
+print(timed(iter_fib, 8000))
