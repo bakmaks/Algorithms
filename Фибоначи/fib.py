@@ -49,6 +49,11 @@ def fib(n):
 
 
 def iter_fib(n):
+    """
+    Вычисление числа Фибоначи с помощью итерраций.
+    :param n:
+    :return:
+    """
     assert n >= 0
     f0, f1 = 0, 1
     for i in range(n - 1):
