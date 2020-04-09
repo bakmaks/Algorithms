@@ -2,22 +2,6 @@ from rcviz import viz
 from PIL import Image
 
 
-def memo(func):
-    """
-    Декоратор для кеширования функции для вычислени чисел фибоначи.
-    При этом мы избавляемся от ранеее объявленной, глобальной переменной "cache"
-    :param func:
-    :return:
-    """
-    temp = {}
-    def wrap(n):
-        if n not in temp:
-            temp[n] = func(n)
-        return temp[n]
-
-    return wrap
-
-
 # @viz
 def fib1(n: int):
     """
@@ -37,6 +21,22 @@ def fib2(n):
         cache[n] = n if n <= 1 else fib2(n-1) + fib2(n-2)
     return cache[n]
 #------------------------------------------------------------------------------------------------------
+
+
+def memo(func):
+    """
+    Декоратор для кеширования функции для вычислени чисел фибоначи.
+    При этом мы избавляемся от ранеее объявленной, глобальной переменной "cache"
+    :param func:
+    :return:
+    """
+    temp = {}
+    def wrap(n):
+        if n not in temp:
+            temp[n] = func(n)
+        return temp[n]
+
+    return wrap
 
 
 @memo
@@ -69,7 +69,7 @@ print(fib2(8))     # 21
 # image1 = Image.open('fib2.png')
 # image1.show()
 
-print(fib2(800))
+print(iter_fib(8))      # 21
 
 # Превышение глубины рекурсии
 # print(fib2(8000))   # RecursionError: maximum recursion depth exceeded in comparison
