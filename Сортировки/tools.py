@@ -1,6 +1,11 @@
+from Сортировки.sorts import *
+from alg_utils import *
+import random as rnd
+
+
 def check_sorted(A: list, ascending=True):
     """
-
+    Функция проверяет отсортирован ли список
     :param A: Список
     :param ascending: Если True, то список должен быть осортирован по возростанию, если False - по убыванию.
     :return: Возвращает True если список сортированный, иначе - False.
@@ -14,41 +19,6 @@ def check_sorted(A: list, ascending=True):
     return flag
 
 
-def merge(A: list, B: list):
-    """
-    Функция слияния двух сортированных списков. Попарно соавниваются эл. двух списков. Меньший эл. заносится
-    во временный список. Индекс списка из которого эл. был перенесён во временный список сдвигается на
-    след. эл., у др. списка индекс остаётся неизменным, и соответсвенно увеличивается индекс
-    временного списка. Действия повторяются до тех пор, пока в одном из списсков не закончатся эл.
-    Оставшиеся эл. переносятся во временный список
-
-    :param A: список
-    :param B: список
-    :return: C список слитый из двух A и B
-    """
-
-def merge(A: list, B: list):
-    len_a = len(A)
-    len_b = len(B)
-    i = k = n = 0                       # Начальные индексы списков
-    C = [0] * (len_a + len_b)           # Временный список
-
-    while i < len_a and k < len_b:      # Пока в том и др. списке есть эл.
-        if A[i] <= B[k]:
-            C[n] = A[i]                 # Во временный список заносится меньший эл.
-            i += 1                      # Индекс списка с меньшим эл. переходит на следующий эл.
-        else:
-            C[n] = B[k]
-            k += 1
-        n += 1                      # Индекс временновго списка передв. вперёд на один эл.
-
-    while i < len_a:                    # Если в A или в B остались элементы
-        C[n] = A[i]
-        i += 1; n += 1
-    while k < len_b:
-        C[n] = B[k]
-        k += 1; n += 1
-    return C
 
 
 if __name__ == "__main__":
@@ -63,3 +33,36 @@ if __name__ == "__main__":
             print(check_sorted(a[type_of_list], ascending=False))
         else:
             print(check_sorted(a[type_of_list]))
+
+
+
+
+def test_sorts(functions, lsts):
+    for function in functions:
+        print(function.__name__)
+        i = 1
+        for lst in lsts:
+            sorted_lst = function(lst)
+            if check_sorted(sorted_lst):
+                print("тест № {} пройден\n".format(i))
+            else:
+                print("Тест № {} не пройден, должно быть\n{},\n а получено:\n{}\n".
+                      format(i, sorted(lst), lst))
+            i += 1
+        print('-'*70)
+
+
+if __name__ == '__main__':
+    lists = [[], [1]]
+    for i in range(3, 7):
+        a = [x for x in range(rnd.randint(2, 10))]
+        rnd.shuffle(a)
+        lists.append(a)
+
+    lists = sorted(lists, key=len)
+
+    function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, hoar_sort]
+
+    test_sorts(function_lst, lists)
+
+
