@@ -24,8 +24,10 @@ def merge(A: list, B: list):
 
     :param A: список
     :param B: список
-    :return:
+    :return: C список слитый из двух A и B
     """
+
+def merge(A: list, B: list):
     len_a = len(A)
     len_b = len(B)
     i = k = n = 0                       # Начальные индексы списков
