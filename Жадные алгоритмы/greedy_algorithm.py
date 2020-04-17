@@ -9,43 +9,27 @@ def segments_covered_with_dots():
     """
     print('Введите кол-во строк:')
     seg_numbers = int(input())
-    seg_dict = {}
     seg_list = []
     print('Введите отрезок:')
     for i in range(seg_numbers):
-        key = tuple(map(int, input().split(' ')))
-        seg_dict[key] = False                       # Если ещё не просматривали отрезок
+        key = sorted(map(int, input().split(' ')))
         seg_list.append(key)                        # Список отрезков
-    seg_list.sort(key=lambda x: x[1])               # сортировка по второму элементу пары
-    dots = set()
-    for segment in seg_list:                        # Выбираем отрезок
-        if seg_dict[segment] is False:
-            for key in seg_dict:
-                # Если правая точка, выбранного отрезка,
-                # попадает на отрезок из словаря
-                if key[0] <= segment[1] <= key[1]:
-                    dots.add(segment[1])        # точка заносится в множество
-                    seg_dict[key] = True        # данный отрезок просмотрен и на нём есть точка
+    seg_list.sort(key=lambda x: x[1])               # Отрезки сортируются по правым концам
+    dots = [seg_list.pop(0)[1]]                     # выбирается правая точка первого отрезка
+    for left_dot, right_dot in seg_list:            # Выбираем левый и правый концы отрезка
+        # Если точка меньше левого конца отрезка то она заносится во множество.
+        # Отрезки были упорядочены по правым концам, соответсвенно - если правая точка первого отрезка
+        # больше чем левые концы последующих отрезков, значит она также будет лежать
+        # и на них. Как только она становится меньше чем левый конец следующего отрезка,
+        # правая точка этого отрезка заносится во множество и т. д.
+        if dots[-1] < left_dot:
+            dots.append(right_dot)
     print(len(dots))
     print(' '.join(list(map(str, dots))))
 
 
-# segments_covered_with_dots()
+segments_covered_with_dots()
 
-
-def b():
-    """
-    Делает то же самое, что и segments_covered_with_dots()
-    :return:
-    """
-    segments = sorted([sorted(map(int, input().split())) for i in range(int(input()))], key=lambda x: x[1])
-    dots = [segments.pop(0)[1]]
-    for l, r in segments:
-        if l > dots[-1]:
-            dots.append(r)
-    print(str(len(dots)) + '\n' + ' '.join(map(str, dots)))
-
-b()
 
 # Примеры работы
 # Sample Input 1:
