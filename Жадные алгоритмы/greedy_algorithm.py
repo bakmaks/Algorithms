@@ -66,11 +66,15 @@ def continuous_backpack():
     L = []
     for i in range(N):
         c, w = map(int, input('Введите чере пробел стоимось предмета и объём:').split())
+        if w == 0:
+            c, w = 0, 0
         L.append([c/w, w])
+
     L.sort(key=lambda x: x[0], reverse=True)
     for thing in L:
-        if W <= thing[1]:
+        if W <= thing[1] or W == 0:
             print('{:.3f}'.format(W*thing[0]))
+            break
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
