@@ -69,12 +69,16 @@ def continuous_backpack():
         if w == 0:
             c, w = 0, 0
         L.append([c/w, w])
-
+    max_cost = 0
     L.sort(key=lambda x: x[0], reverse=True)
     for thing in L:
-        if W <= thing[1] or W == 0:
-            print('{:.3f}'.format(W*thing[0]))
+        if W > thing[1]:
+            max_cost += thing[0] * thing[1]
+            W -= thing[1]
+        else:
+            max_cost += W * thing[0]
             break
+    print('{0:.3f}'.format(max_cost))
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
