@@ -105,22 +105,23 @@ def various_terms(n):
     """
 
     assert n > 0
-    i, j  = 1, 2
+    j = 2
     k = 2
-    out_str = '1 '
+    out_str = ''
     if n <= 2:
         print('{}\n{}'.format(1, n))
         return
     else:
-        j =
         while True:
+            out_str = str(k) + ' '
             while j <= k * 2:
-                if k + j == n:
+                if k - 1 + j == n:
                     out_str += str(j)
                     print('{}\n{}'.format(k + 1, out_str))
                     return
                 j += 1
             k += 1
+            j = k
 
 # Sample Input 1:
 #
@@ -142,4 +143,4 @@ def various_terms(n):
 if __name__ == '__main__':
     # segments_covered_with_dots()
     # continuous_backpack()
-    various_terms(4)
+    various_terms(6)
