@@ -95,12 +95,11 @@ def continuous_backpack():
 #------------------------------------------------------------------------------------------------------------
 
 
-def various_terms(n):
+def various_terms():
     """
     По данному числу 1 <= n <= 10^9 найдите максимальное число k, для которого n можно
     представить как сумму k различных(не повторяющихся) натуральных слагаемых. Выведите в первой строке число k,
     во второй — k слагаемых.
-    :param n: 1 <= n <= 10^9
     :return:
     """
     n = int(input())
@@ -145,5 +144,5 @@ def various_terms(n):
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
-    various_terms(15)
     # continuous_backpack()
+    various_terms()
