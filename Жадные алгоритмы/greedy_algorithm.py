@@ -103,23 +103,26 @@ def various_terms(n):
     :param n: 1 <= n <= 10^9
     :return:
     """
-
+    n = int(input())
     assert n > 0
-    j = 2
     k = 2
-    out_str = ''
+    out_str = '1 '
+    sum_num = 1
+    run = True
     if n <= 2:
         print('{}\n{}'.format(1, n))
-        return
     else:
-        while True:
-            out_str = str(k) + ' '
+        while run:
+            j = k
             while j <= k * 2:
-                if k - 1 + j == n:
-                    out_str += str(j)
-                    print('{}\n{}'.format(k + 1, out_str))
-                    return
+                if j + sum_num == n:
+                    print(k)
+                    print(out_str + str(n - sum_num))
+                    run = False
+                    break
                 j += 1
+            out_str += str(k) + ' '
+            sum_num += k
             k += 1
             j = k
 
@@ -142,5 +145,5 @@ def various_terms(n):
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
+    various_terms(15)
     # continuous_backpack()
-    various_terms(6)
