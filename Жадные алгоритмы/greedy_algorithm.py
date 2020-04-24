@@ -105,25 +105,25 @@ def various_terms():
     n = int(input())
     assert n > 0
     k = 2
-    out_str = '1 '
+    out_str = [1]
     sum_num = 1
     run = True
     if n <= 2:
         print('{}\n{}'.format(1, n))
     else:
         while run:
-            j = k
-            while j <= k * 2:
-                if j + sum_num == n:
-                    print(k)
-                    print(out_str + str(n - sum_num))
-                    run = False
-                    break
-                j += 1
-            out_str += str(k) + ' '
-            sum_num += k
-            k += 1
-            j = k
+            if n - sum_num > k * 2:
+                out_str.append(k)
+                sum_num += k
+                k += 1
+            else:
+                out_str.append(n - sum_num)
+                print(k)
+                print(*out_str)
+                run = False
+
+
+
 
 # Sample Input 1:
 #
