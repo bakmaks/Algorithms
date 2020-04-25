@@ -19,24 +19,6 @@ def check_sorted(A: list, ascending=True):
     return flag
 
 
-
-
-if __name__ == "__main__":
-    a = {
-        'not sorted': [1,6,4,5],
-        'sorted ascending': [0,2,6,9,10,50],
-        'sorted descending': [9,8,7,6,5]
-         }
-    for type_of_list in a:
-        print(type_of_list, a[type_of_list])
-        if type_of_list == 'sorted descending':
-            print(check_sorted(a[type_of_list], ascending=False))
-        else:
-            print(check_sorted(a[type_of_list]))
-
-
-
-
 def test_sorts(functions, lsts):
     for function in functions:
         print(function.__name__)
@@ -53,9 +35,23 @@ def test_sorts(functions, lsts):
 
 
 if __name__ == '__main__':
+    a = {
+        'not sorted': [1, 6, 4, 5],
+        'sorted ascending': [0, 2, 6, 9, 10, 50],
+        'sorted descending': [9, 8, 7, 6, 5]
+    }
+    # Тестирование функции check_sorted()
+    for type_of_list in a:
+        print(type_of_list, a[type_of_list])
+        if type_of_list == 'sorted descending':
+            print(check_sorted(a[type_of_list], ascending=False))
+        else:
+            print(check_sorted(a[type_of_list]))
+
+    # Проверка функций сортировки
     lists = [[], [1]]
-    for i in range(3, 7):
-        a = [x for x in range(rnd.randint(2, 10))]
+    for i in range(3, 1000, 100):
+        a = [x for x in range(i)]
         rnd.shuffle(a)
         lists.append(a)
 
