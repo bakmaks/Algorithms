@@ -1,3 +1,5 @@
+from alg_utils import compare
+
 
 def segments_covered_with_dots():
     """
@@ -95,14 +97,14 @@ def continuous_backpack():
 #------------------------------------------------------------------------------------------------------------
 
 
-def various_terms():
+def various_terms(n):
     """
     По данному числу 1 <= n <= 10^9 найдите максимальное число k, для которого n можно
     представить как сумму k различных(не повторяющихся) натуральных слагаемых. Выведите в первой строке число k,
     во второй — k слагаемых.
     :return:
     """
-    n = int(input())
+    # n = int(input())
     assert n > 0
     k = 2
     out_str = [1]
@@ -159,4 +161,4 @@ def various_terms():
 if __name__ == '__main__':
     # segments_covered_with_dots()
     # continuous_backpack()
-    various_terms()
+    compare([various_terms], list(range(10, 10000, 100)))

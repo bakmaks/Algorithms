@@ -41,12 +41,12 @@ if __name__ == '__main__':
         'sorted descending': [9, 8, 7, 6, 5]
     }
     # Тестирование функции check_sorted()
-    for type_of_list in a:
-        print(type_of_list, a[type_of_list])
-        if type_of_list == 'sorted descending':
-            print(check_sorted(a[type_of_list], ascending=False))
-        else:
-            print(check_sorted(a[type_of_list]))
+    # for type_of_list in a:
+    #     print(type_of_list, a[type_of_list])
+    #     if type_of_list == 'sorted descending':
+    #         print(check_sorted(a[type_of_list], ascending=False))
+    #     else:
+    #         print(check_sorted(a[type_of_list]))
 
     # Проверка функций сортировки
     lists = [[], [1]]
@@ -59,6 +59,8 @@ if __name__ == '__main__':
 
     function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, hoar_sort]
 
-    test_sorts(function_lst, lists)
+    # test_sorts(function_lst, lists)
+
+    compare(function_lst, lists, len(lists))
 
 
