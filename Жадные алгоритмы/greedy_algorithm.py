@@ -96,7 +96,8 @@ def continuous_backpack():
 
 #------------------------------------------------------------------------------------------------------------
 
-
+# Для сравнения времени выполнения в функции compare()
+# надо закоментировать принты в обеих функциях.
 def various_terms(n):
     """
     По данному числу 1 <= n <= 10^9 найдите максимальное число k, для которого n можно
@@ -112,6 +113,7 @@ def various_terms(n):
     run = True
     if n <= 2:
         print('{}\n{}'.format(1, n))
+        pass
     else:
         while run:
             if n - sum_num > k * 2:
@@ -123,6 +125,20 @@ def various_terms(n):
                 print(k)
                 print(*out_str)
                 run = False
+
+
+def analog_various_terms(n):
+    # Не мой алгоритм. Работает быстрее.
+    i = 1
+    numbers = []
+    while n > 2 * i:
+        n -= i
+        numbers.append(i)
+        i += 1
+    numbers.append(n)
+    print(i)
+    print(*numbers, sep=' ')
+#-------------------------------------------------------------------------------------------------------------
 
 # 1 = 1,
 # 2 = 2,
@@ -161,4 +177,6 @@ def various_terms(n):
 if __name__ == '__main__':
     # segments_covered_with_dots()
     # continuous_backpack()
-    compare([various_terms], list(range(10, 10000, 100)))
+    # various_terms(6)
+    # analog_various_terms(6)
+    compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
