@@ -174,9 +174,21 @@ def analog_various_terms(n):
 #---------------------------------------------------------------------------------------------------------------
 
 
+def huffman_coding(s):
+    frequency_of_occurrence = {}
+    for letter in s:
+        if letter not in frequency_of_occurrence:
+            frequency_of_occurrence[letter] = 1
+        else:
+            frequency_of_occurrence[letter] += 1
+    print(s)
+    print(frequency_of_occurrence)
+
 if __name__ == '__main__':
     # segments_covered_with_dots()
     # continuous_backpack()
     # various_terms(6)
     # analog_various_terms(6)
-    compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
+    # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
+    huffman_coding('abacabad')
+    pass
