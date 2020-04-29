@@ -175,6 +175,22 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
+    class Leaf:
+        ch = None
+        frq = None
+
+        def __init__(self, el0):
+            self.ch = el0[0]
+            self.frq = el0[1]
+
+        def create_top(self, leaf0, leaf1):
+            return leaf0.frq + leaf1.frq
+
+    class Top:
+        leaf0 = None
+        leaf1 = None
+        frq = None
+
     frequency_of_occurrence = {}
     # Подсчёт кол-ва вхождений символов в строку
     for letter in s:
@@ -188,14 +204,8 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.append([key, frequency_of_occurrence[key]])
 
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
-    while len(lst) > 1:
-        i = lst.pop(0)
-        j = lst.pop(0)
-        lst = lst.insert(0, [[i, j], i[1]+j[1]])
 
-
-    print(lst)
-
+        
 
 
 
@@ -206,4 +216,3 @@ if __name__ == '__main__':
     # analog_various_terms(6)
     # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
     huffman_coding('abacabad')
-    pass
