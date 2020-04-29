@@ -175,21 +175,37 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-    class Leaf:
-        ch = None
-        frq = None
-
-        def __init__(self, el0):
-            self.ch = el0[0]
-            self.frq = el0[1]
-
-        def create_top(self, leaf0, leaf1):
-            return leaf0.frq + leaf1.frq
+    # class Leaf:
+    #     ch = None
+    #     frq = None
+    #
+    #     def __init__(self, el0):
+    #         self.ch = el0[0]
+    #         self.frq = el0[1]
+    #
+    #     def __str__(self):
+    #         print(f'символ %s, частота %s' % (self.ch, self.frq))
 
     class Top:
-        leaf0 = None
-        leaf1 = None
-        frq = None
+        prev_top = None
+        next_top = None
+
+        def __init__(self, leaf0=None, leaf1=None):
+            self.leaf0 = leaf0
+            self.leaf1 = leaf1
+            if leaf1 is None:
+                self.sum_frq = leaf0[1] + self.prev_top.sum_frq
+            else:
+                self.sum_frq = leaf0[1] + leaf1[1]
+                self.prev_top = self
+
+        def __str__(self):
+            leaf1_str = f'leaf1: [%s, частота %s]' % (self.leaf1[0], self.leaf1[1]) if self.leaf1 is not None else None
+            print(f'leaf0: [%s, частота %s]\n%s' % (self.leaf0[0], self.leaf0[1], leaf1_str))
+
+        def get_next_top(self, leaf):
+            top = Top(leaf0=leaf)
+            return top
 
     frequency_of_occurrence = {}
     # Подсчёт кол-ва вхождений символов в строку
@@ -204,8 +220,8 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.append([key, frequency_of_occurrence[key]])
 
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
-
-        
+    t = Top(lst.pop(0))
+    print(t)
 
 
 
