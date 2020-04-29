@@ -174,15 +174,30 @@ def analog_various_terms(n):
 #---------------------------------------------------------------------------------------------------------------
 
 
-def huffman_coding(s):
+def huffman_coding(s):  # s = 'abacabad'
     frequency_of_occurrence = {}
+    # Подсчёт кол-ва вхождений символов в строку
     for letter in s:
-        if letter not in frequency_of_occurrence:
-            frequency_of_occurrence[letter] = 1
-        else:
+        if letter in frequency_of_occurrence:
             frequency_of_occurrence[letter] += 1
-    print(s)
-    print(frequency_of_occurrence)
+        else:
+            frequency_of_occurrence[letter] = 1
+
+    lst = []
+    for key in frequency_of_occurrence:
+        lst.append([key, frequency_of_occurrence[key]])
+
+    lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
+    while len(lst) > 1:
+        i = lst.pop(0)
+        j = lst.pop(0)
+        lst = lst.insert(0, [[i, j], i[1]+j[1]])
+
+
+    print(lst)
+
+
+
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
