@@ -175,18 +175,12 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-    # class Leaf:
-    #     ch = None
-    #     frq = None
-    #
-    #     def __init__(self, el0):
-    #         self.ch = el0[0]
-    #         self.frq = el0[1]
-    #
-    #     def __str__(self):
-    #         print(f'символ %s, частота %s' % (self.ch, self.frq))
-
     class Top:
+        leaf0 = None
+        leaf1 = None
+        sum_frq = None
+
+    class Tree:
         prev_top = None
         next_top = None
 
@@ -201,11 +195,9 @@ def huffman_coding(s):  # s = 'abacabad'
 
         def __str__(self):
             leaf1_str = f'leaf1: [%s, частота %s]' % (self.leaf1[0], self.leaf1[1]) if self.leaf1 is not None else None
-            print(f'leaf0: [%s, частота %s]\n%s' % (self.leaf0[0], self.leaf0[1], leaf1_str))
+            return f'leaf0: [%s, частота %s]\n%s' % (self.leaf0[0], self.leaf0[1], leaf1_str)
 
-        def get_next_top(self, leaf):
-            top = Top(leaf0=leaf)
-            return top
+
 
     frequency_of_occurrence = {}
     # Подсчёт кол-ва вхождений символов в строку
@@ -220,8 +212,7 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.append([key, frequency_of_occurrence[key]])
 
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
-    t = Top(lst.pop(0))
-    print(t)
+
 
 
 
