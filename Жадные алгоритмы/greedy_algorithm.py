@@ -175,28 +175,13 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-    class Top:
-        leaf0 = None
-        leaf1 = None
-        sum_frq = None
-
-    class Tree:
-        prev_top = None
-        next_top = None
-
-        def __init__(self, leaf0=None, leaf1=None):
-            self.leaf0 = leaf0
-            self.leaf1 = leaf1
-            if leaf1 is None:
-                self.sum_frq = leaf0[1] + self.prev_top.sum_frq
-            else:
-                self.sum_frq = leaf0[1] + leaf1[1]
-                self.prev_top = self
-
-        def __str__(self):
-            leaf1_str = f'leaf1: [%s, частота %s]' % (self.leaf1[0], self.leaf1[1]) if self.leaf1 is not None else None
-            return f'leaf0: [%s, частота %s]\n%s' % (self.leaf0[0], self.leaf0[1], leaf1_str)
-
+    def search_prev(n):
+        k = 0
+        while k < len(lst):
+            if lst[k][1] <= n:
+                k += 1
+                return k
+        return k
 
 
     frequency_of_occurrence = {}
@@ -213,7 +198,17 @@ def huffman_coding(s):  # s = 'abacabad'
 
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
 
+    while len(lst) > 1:
+        l_leaf, r_leaf = lst.pop(0), lst.pop(0)
+        print(l_leaf, r_leaf)
+        frq = l_leaf[1] + r_leaf[1]
+        i = search_prev(frq)
+        if i < len(lst):
+            lst.insert(i, [[l_leaf, r_leaf], frq])
+        else:
+            lst.append([[l_leaf, r_leaf], frq])
 
+    print(lst)
 
 
 if __name__ == '__main__':
@@ -222,4 +217,5 @@ if __name__ == '__main__':
     # various_terms(6)
     # analog_various_terms(6)
     # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
-    huffman_coding('abacabad')
+    # huffman_coding('abacabad')
+    huffman_coding('beep boop beer!')
