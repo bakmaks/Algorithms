@@ -184,7 +184,6 @@ def huffman_coding(s):  # s = 'abacabad'
                 return k
         return k
 
-
     frequency_of_occurrence = {}
     # Подсчёт кол-ва вхождений символов в строку
     for letter in s:
@@ -198,6 +197,8 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.append([key, frequency_of_occurrence[key]])
 
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
+    print(s)
+    print('`'*70, '\n', lst, '\n', '`'*70)
 
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
@@ -212,7 +213,33 @@ def huffman_coding(s):  # s = 'abacabad'
         print(lst)
         print('====================================================================================================')
 
-    print(lst)
+    print(lst[0])
+
+
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start)
+    for next in graph[start] - visited:
+        dfs(graph, next, visited)
+    return visited
+
+
+# graph = {'0': {'1', '2'},
+#          '1': {'0', '3', '4'},
+#          '2': {'0'},
+#          '3': {'1'},
+#          '4': {'2', '3'}
+#          }
+
+graph = {'0': {'1', '2', '3'},
+         '1': {'0', '2'},
+         '2': {'0', '1', '4'},
+         '3': {'0'},
+         '4': {'2'}
+         }
+
 
 
 if __name__ == '__main__':
@@ -221,5 +248,9 @@ if __name__ == '__main__':
     # various_terms(6)
     # analog_various_terms(6)
     # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
-    # huffman_coding('abacabad')
-    huffman_coding('beep boop beer!')
+
+    # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
+    str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
+    huffman_coding(str_list[3])
+
+    # print(dfs(graph, '0'))
