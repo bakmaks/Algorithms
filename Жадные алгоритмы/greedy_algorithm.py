@@ -175,10 +175,28 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-    def search_prev(n):
+
+    def dfs(tree):
+        # visited = {tree: True}
+
+        for w in tree:
+            # if not visited[w]:  # посещён ли текущий сосед?
+            print(w)
+            dfs(w)
+        if len(tree) < 2:
+            print(tree)
+            return
+    
+    def search_prev(f, lst_with_frq):
+        """
+        Возвращает индекс после которого надо вставлять новый элемент.
+        :param f: int частота символа или сумма частот двух символов
+        :param lst_with_frq: list  список символов с частотами вхождения символов
+        :return: int индекс
+        """
         k = 0
-        while k < len(lst):
-            if lst[k][1] < n:
+        while k < len(lst_with_frq):
+            if lst_with_frq[k][1] < f:
                 k += 1
             else:
                 return k
@@ -195,35 +213,33 @@ def huffman_coding(s):  # s = 'abacabad'
     lst = []
     for key in frequency_of_occurrence:
         lst.append([key, frequency_of_occurrence[key]])
-
+    # Сортировка списка по частоте вхождений
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
     print(s)
     print('`'*70, '\n', lst, '\n', '`'*70)
-
+    # Составление двоичного дерева
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
         print(l_leaf, r_leaf)
         print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[1] + r_leaf[1]
-        i = search_prev(frq)
-        if i < len(lst):
-            lst.insert(i, [[l_leaf, r_leaf], frq])
-        else:
-            lst.append([[l_leaf, r_leaf], frq])
+        i = search_prev(frq, lst)
+        lst.insert(i, [[l_leaf, r_leaf], frq])
         print(lst)
         print('====================================================================================================')
 
-    print(lst[0])
+    print(lst)
+    dfs(lst)
 
 
-def dfs(graph, start, visited=None):
-    if visited is None:
-        visited = set()
-    visited.add(start)
-    print(start)
-    for next in graph[start] - visited:
-        dfs(graph, next, visited)
-    return visited
+# def dfs(graph, start, visited=None):
+#     if visited is None:
+#         visited = set()
+#     visited.add(start)
+#     print(start)
+#     for next in graph[start] - visited:
+#         dfs(graph, next, visited)
+#     return visited
 
 
 # graph = {'0': {'1', '2'},
