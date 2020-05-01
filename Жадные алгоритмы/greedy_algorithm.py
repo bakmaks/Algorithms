@@ -178,14 +178,14 @@ def huffman_coding(s):  # s = 'abacabad'
 
     def dfs(tree):
         # visited = {tree: True}
-
+        if len(tree) == 0:
+            print(tree)
+            return
         for w in tree:
             # if not visited[w]:  # посещён ли текущий сосед?
             print(w)
             dfs(w)
-        if len(tree) < 2:
-            print(tree)
-            return
+
     
     def search_prev(f, lst_with_frq):
         """
