@@ -178,8 +178,9 @@ def huffman_coding(s):  # s = 'abacabad'
     def search_prev(n):
         k = 0
         while k < len(lst):
-            if lst[k][1] <= n:
+            if lst[k][1] < n:
                 k += 1
+            else:
                 return k
         return k
 
@@ -201,12 +202,15 @@ def huffman_coding(s):  # s = 'abacabad'
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
         print(l_leaf, r_leaf)
+        print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[1] + r_leaf[1]
         i = search_prev(frq)
         if i < len(lst):
             lst.insert(i, [[l_leaf, r_leaf], frq])
         else:
             lst.append([[l_leaf, r_leaf], frq])
+        print(lst)
+        print('====================================================================================================')
 
     print(lst)
 
