@@ -175,10 +175,28 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-
-    def tree_walk(tree):
+    codes = {}
+    code = ''
+    def tree_walk(tree, code):
         len_tree = len(tree)
-        print(f'len tree = %s' % (len_tree))
+        print(f'len tree = %s' % len_tree)
+        print(tree[-1])
+        i = 2
+        while i <= len_tree:
+            if len_tree == 3:
+                if i == 2:
+                    print(tree[-i])
+                    code += '0'
+                    tree_walk(tree[-i], code)
+                else:
+                    print(tree[-i])
+                    code += '1'
+                    tree_walk(tree[-i], code)
+            else:
+                print('end', tree[0])
+                print(code)
+                codes[tree[0]] = code
+            i += 1
         # print(tree[-1])
         # while:
         #     dfs(graph, next, visited)
@@ -213,21 +231,24 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.append([key, frequency_of_occurrence[key]])
     # Сортировка списка по частоте вхождений
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
+    lst_old = lst[:]
     print(s)
     print('`'*70, '\n', lst, '\n', '`'*70)
     # Составление двоичного дерева
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
-        print(l_leaf, r_leaf)
-        print('--------------------------------------------------------------------------------------------------')
+        # print(l_leaf, r_leaf)
+        # print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[-1] + r_leaf[-1]
         i = search_prev(frq, lst)
         lst.insert(i, [l_leaf, r_leaf, frq])
-        print(lst)
-        print('====================================================================================================')
+        # print(lst)
+        # print('====================================================================================================')
 
     print(lst[0])
-    tree_walk(lst[-1])
+    tree_walk(lst[-1], code)
+    print(lst_old)
+    print(codes)
 
 
 # def dfs(graph, start, visited=None):
@@ -265,6 +286,6 @@ if __name__ == '__main__':
 
     # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
     str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
-    huffman_coding(str_list[3])
+    huffman_coding(str_list[2])
 
     # print(dfs(graph, '0'))
