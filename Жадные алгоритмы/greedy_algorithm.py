@@ -176,15 +176,13 @@ def analog_various_terms(n):
 
 def huffman_coding(s):  # s = 'abacabad'
 
-    def dfs(tree):
-        # visited = {tree: True}
-        if len(tree) == 0:
-            print(tree)
-            return
-        for w in tree:
-            # if not visited[w]:  # посещён ли текущий сосед?
-            print(w)
-            dfs(w)
+    def tree_walk(tree):
+        len_tree = len(tree)
+        print(f'len tree = %s' % (len_tree))
+        # print(tree[-1])
+        # while:
+        #     dfs(graph, next, visited)
+        # return visited
 
     
     def search_prev(f, lst_with_frq):
@@ -196,7 +194,7 @@ def huffman_coding(s):  # s = 'abacabad'
         """
         k = 0
         while k < len(lst_with_frq):
-            if lst_with_frq[k][1] < f:
+            if lst_with_frq[k][-1] < f:
                 k += 1
             else:
                 return k
@@ -222,14 +220,14 @@ def huffman_coding(s):  # s = 'abacabad'
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
         print(l_leaf, r_leaf)
         print('--------------------------------------------------------------------------------------------------')
-        frq = l_leaf[1] + r_leaf[1]
+        frq = l_leaf[-1] + r_leaf[-1]
         i = search_prev(frq, lst)
-        lst.insert(i, [[l_leaf, r_leaf], frq])
+        lst.insert(i, [l_leaf, r_leaf, frq])
         print(lst)
         print('====================================================================================================')
 
-    print(lst)
-    dfs(lst)
+    print(lst[0])
+    tree_walk(lst[-1])
 
 
 # def dfs(graph, start, visited=None):
