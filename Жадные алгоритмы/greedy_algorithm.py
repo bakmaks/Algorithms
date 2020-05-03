@@ -175,41 +175,15 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
-    codes = {}
-    # code = ''
+    codes = {}      # Словарь кодов символов {'символ': 'код'}
 
-    def tree_walk(tree, code='', visited=None):
+    def tree_walk(tree, code=''):
         len_tree = len(tree)
-        print(f'len tree = %s' % len_tree)
-        print(tree[-1])
-        visited = visited or set()
-        i = 2
-
-        while i <= 3 and len_tree == 4:
-            # if len_tree == 4:
-            if tree[0] not in visited:
-                if i == 2:
-                    print(tree[-i])
-                    code += '0'
-                    tree_walk(tree[-i], code)
-                else:
-                    print(tree[-i])
-                    code += '1'
-                    tree_walk(tree[-i], code)
-            # else:
-            #     print('end', tree[0])
-            #     print(code)
-            #     codes[tree[0]] = code
-            i += 1
-        visited.add(tree[0])
-        print('end', tree[0])
-        print(code)
-        codes[tree[0]] = code
-        # print(tree[-1])
-        # while:
-        #     dfs(graph, next, visited)
-        # return visited
-
+        if len_tree == 3:
+            tree_walk(tree[-2], code+'0')
+            tree_walk(tree[-3], code+'1')
+        else:
+            codes[tree[0]] = code
     
     def search_prev(f, lst_with_frq):
         """
@@ -241,50 +215,25 @@ def huffman_coding(s):  # s = 'abacabad'
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
     lst_old = lst[:]
     print(s)
-    print('`'*70, '\n', lst, '\n', '`'*70)
+    # print('`'*70, '\n', lst, '\n', '`'*70)
     # Составление двоичного дерева
-    number = 0
+    # number = 0
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
-        print(l_leaf, r_leaf)
-        print('--------------------------------------------------------------------------------------------------')
+        # print(l_leaf, r_leaf)
+        # print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[-1] + r_leaf[-1]
-        lst.insert(search_prev(frq, lst), [number, l_leaf, r_leaf, frq])
-        number += 1
-        print(lst)
-        print('====================================================================================================')
+        lst.insert(search_prev(frq, lst), [l_leaf, r_leaf, frq])
+        # # number += 1
+        # print(lst)
+        # print('====================================================================================================')
 
-    print(lst[0])
+    # print(lst[0])
     tree_walk(lst[-1])
-    # print(lst_old)
-    print(codes)
-
-
-# def dfs(graph, start, visited=None):
-#     if visited is None:
-#         visited = set()
-#     visited.add(start)
-#     print(start)
-#     for next in graph[start] - visited:
-#         dfs(graph, next, visited)
-#     return visited
-
-
-# graph = {'0': {'1', '2'},
-#          '1': {'0', '3', '4'},
-#          '2': {'0'},
-#          '3': {'1'},
-#          '4': {'2', '3'}
-#          }
-
-graph = {'0': {'1', '2', '3'},
-         '1': {'0', '2'},
-         '2': {'0', '1', '4'},
-         '3': {'0'},
-         '4': {'2'}
-         }
-
-
+    l_keys = list(codes.keys())
+    # print(l_keys)
+    # print(codes)
+    [print(x, codes[x]) for x in sorted(l_keys)]
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
@@ -297,4 +246,3 @@ if __name__ == '__main__':
     str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
     huffman_coding(str_list[2])
 
-    # print(dfs(graph, '0'))
