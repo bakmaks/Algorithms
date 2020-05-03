@@ -211,28 +211,18 @@ def huffman_coding(s):  # s = 'abacabad'
     lst = []
     for key in frequency_of_occurrence:
         lst.append([key, frequency_of_occurrence[key]])
+
     # Сортировка списка по частоте вхождений
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
-    lst_old = lst[:]
     print(s)
-    # print('`'*70, '\n', lst, '\n', '`'*70)
+
     # Составление двоичного дерева
-    # number = 0
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
-        # print(l_leaf, r_leaf)
-        # print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[-1] + r_leaf[-1]
         lst.insert(search_prev(frq, lst), [l_leaf, r_leaf, frq])
-        # # number += 1
-        # print(lst)
-        # print('====================================================================================================')
-
-    # print(lst[0])
     tree_walk(lst[-1])
     l_keys = list(codes.keys())
-    # print(l_keys)
-    # print(codes)
     [print(x, codes[x]) for x in sorted(l_keys)]
 
 if __name__ == '__main__':
@@ -244,5 +234,5 @@ if __name__ == '__main__':
 
     # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
     str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
-    huffman_coding(str_list[2])
+    huffman_coding(str_list[1])
 
