@@ -176,14 +176,18 @@ def analog_various_terms(n):
 
 def huffman_coding(s):  # s = 'abacabad'
     codes = {}
-    code = ''
-    def tree_walk(tree, code):
+    # code = ''
+
+    def tree_walk(tree, code='', visited=None):
         len_tree = len(tree)
         print(f'len tree = %s' % len_tree)
         print(tree[-1])
+        visited = visited or set()
         i = 2
-        while i <= len_tree:
-            if len_tree == 3:
+
+        while i <= 3 and len_tree == 4:
+            # if len_tree == 4:
+            if tree[0] not in visited:
                 if i == 2:
                     print(tree[-i])
                     code += '0'
@@ -192,11 +196,15 @@ def huffman_coding(s):  # s = 'abacabad'
                     print(tree[-i])
                     code += '1'
                     tree_walk(tree[-i], code)
-            else:
-                print('end', tree[0])
-                print(code)
-                codes[tree[0]] = code
+            # else:
+            #     print('end', tree[0])
+            #     print(code)
+            #     codes[tree[0]] = code
             i += 1
+        visited.add(tree[0])
+        print('end', tree[0])
+        print(code)
+        codes[tree[0]] = code
         # print(tree[-1])
         # while:
         #     dfs(graph, next, visited)
@@ -235,19 +243,20 @@ def huffman_coding(s):  # s = 'abacabad'
     print(s)
     print('`'*70, '\n', lst, '\n', '`'*70)
     # Составление двоичного дерева
+    number = 0
     while len(lst) > 1:
         l_leaf, r_leaf = lst.pop(0), lst.pop(0)
-        # print(l_leaf, r_leaf)
-        # print('--------------------------------------------------------------------------------------------------')
+        print(l_leaf, r_leaf)
+        print('--------------------------------------------------------------------------------------------------')
         frq = l_leaf[-1] + r_leaf[-1]
-        i = search_prev(frq, lst)
-        lst.insert(i, [l_leaf, r_leaf, frq])
-        # print(lst)
-        # print('====================================================================================================')
+        lst.insert(search_prev(frq, lst), [number, l_leaf, r_leaf, frq])
+        number += 1
+        print(lst)
+        print('====================================================================================================')
 
     print(lst[0])
-    tree_walk(lst[-1], code)
-    print(lst_old)
+    tree_walk(lst[-1])
+    # print(lst_old)
     print(codes)
 
 
