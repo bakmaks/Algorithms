@@ -175,6 +175,9 @@ def analog_various_terms(n):
 
 
 def huffman_coding(s):  # s = 'abacabad'
+    if s == '' or s is None:
+        print('0:', '0')
+        return {'0': '0'}, ''
     codes = {}      # Словарь кодов символов {'символ': 'код'}
 
     def tree_walk(tree, code=''):
@@ -212,17 +215,20 @@ def huffman_coding(s):  # s = 'abacabad'
     for key in frequency_of_occurrence:
         lst.append([key, frequency_of_occurrence[key]])
 
-    # Сортировка списка по частоте вхождений
-    lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
     len_lst = len(lst)
-    print(s)
+    if len_lst <= 1:
+        codes = {lst[0][0]: '0'}
+    else:
+        # Сортировка списка по частоте вхождений
+        lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
+        # print(s)
 
-    # Составление двоичного дерева
-    while len(lst) > 1:
-        l_leaf, r_leaf = lst.pop(0), lst.pop(0)
-        frq = l_leaf[-1] + r_leaf[-1]
-        lst.insert(search_prev(frq, lst), [l_leaf, r_leaf, frq])
-    tree_walk(lst[-1])
+        # Составление двоичного дерева
+        while len(lst) > 1:
+            l_leaf, r_leaf = lst.pop(0), lst.pop(0)
+            frq = l_leaf[-1] + r_leaf[-1]
+            lst.insert(search_prev(frq, lst), [l_leaf, r_leaf, frq])
+        tree_walk(lst[-1])
     l_keys = list(codes.keys())
     encode_str = ''
     for ch in s:
@@ -232,17 +238,8 @@ def huffman_coding(s):  # s = 'abacabad'
     print(encode_str)
     return codes, encode_str
 
-if __name__ == '__main__':
-    # segments_covered_with_dots()
-    # continuous_backpack()
-    # various_terms(6)
-    # analog_various_terms(6)
-    # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
 
-    # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
-    str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
-    # some_codes, some_encode_str = {}, ''
-    some_codes, some_encoded_str = huffman_coding(str_list[1])
+def decode_encoded_str(some_codes, some_encoded_str):
     reversed_codes = {value: key for key, value in some_codes.items()}
     decoded_str, acc = '', ''
     for ch in some_encoded_str:
@@ -251,6 +248,20 @@ if __name__ == '__main__':
             decoded_str += reversed_codes[acc]
             acc = ''
     print(decoded_str)
+
+
+if __name__ == '__main__':
+    # segments_covered_with_dots()
+    # continuous_backpack()
+    # various_terms(6)
+    # analog_various_terms(6)
+    # compare([various_terms, analog_various_terms], list(range(10, 100000, 100)))
+
+    # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
+    str_list = ['', 'a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
+    encoded_dict, encoded_str = huffman_coding(str_list[5])
+    decode_encoded_str(encoded_dict, encoded_str)
+
 
 
 
