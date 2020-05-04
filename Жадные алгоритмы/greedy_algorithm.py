@@ -214,6 +214,7 @@ def huffman_coding(s):  # s = 'abacabad'
 
     # Сортировка списка по частоте вхождений
     lst.sort(key=lambda x: x[1])    # lst = [['c', 1], ['d', 1], ['b', 2], ['a', 4]]
+    len_lst = len(lst)
     print(s)
 
     # Составление двоичного дерева
@@ -223,7 +224,13 @@ def huffman_coding(s):  # s = 'abacabad'
         lst.insert(search_prev(frq, lst), [l_leaf, r_leaf, frq])
     tree_walk(lst[-1])
     l_keys = list(codes.keys())
-    [print(x, codes[x]) for x in sorted(l_keys)]
+    encode_str = ''
+    for ch in s:
+        encode_str += codes[ch]
+    print(len_lst, len(encode_str))
+    [print(x, codes[x], sep=': ') for x in sorted(l_keys)]
+    print(encode_str)
+    return codes, encode_str
 
 if __name__ == '__main__':
     # segments_covered_with_dots()
@@ -234,5 +241,16 @@ if __name__ == '__main__':
 
     # Проверочные строки ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
     str_list = ['a', 'ddd', 'abacabad', 'beep boop beer!', 'accepted']
-    huffman_coding(str_list[1])
+    # some_codes, some_encode_str = {}, ''
+    some_codes, some_encoded_str = huffman_coding(str_list[1])
+    reversed_codes = {value: key for key, value in some_codes.items()}
+    decoded_str, acc = '', ''
+    for ch in some_encoded_str:
+        acc += ch
+        if acc in reversed_codes:
+            decoded_str += reversed_codes[acc]
+            acc = ''
+    print(decoded_str)
+
+
 
