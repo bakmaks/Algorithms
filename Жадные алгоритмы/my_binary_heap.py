@@ -11,13 +11,13 @@
 class MyBinaryHeap:
     max_heap = []   # Куча с максимумом в корне.
     heap_size = 0
-    index = 0
+    # index = 0
 
     def insert(self, x):
         self.max_heap.append(x)
         self.heap_size = len(self.max_heap)
-        self.index = self.heap_size - 1
-        self.siftup(self.index)
+        # self.index = self.heap_size - 1
+        self.siftup(self.heap_size - 1)
 
     def extract_max(self):
         return self.max_heap[self.index]
