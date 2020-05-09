@@ -37,14 +37,22 @@ class MyBinaryHeap:
         while 0 <= i < self.heap_size:
             left_child = 2 * i + 1
             right_child = 2 * i + 2
-            if left_child < self.heap_size and self.max_heap[i] < self.max_heap[left_child]:
-                self.max_heap[i], self.max_heap[left_child] = self.max_heap[left_child], self.max_heap[i]
-                i = left_child
-            elif right_child < self.heap_size and self.max_heap[i] < self.max_heap[right_child]:
-                self.max_heap[i], self.max_heap[right_child] = self.max_heap[right_child], self.max_heap[i]
-                i = right_child
+            if right_child < self.heap_size:
+                if self.max_heap[left_child] < self.max_heap[right_child]:
+                    if self.max_heap[i] < self.max_heap[left_child]:
+                        self.max_heap[i], self.max_heap[left_child] = self.max_heap[left_child], self.max_heap[i]
+                        i = left_child
+                else:
+                    if self.max_heap[i] < self.max_heap[right_child]:
+                        self.max_heap[i], self.max_heap[right_child] = self.max_heap[right_child], self.max_heap[i]
+                        i = right_child
+            elif left_child < self.heap_size:
+                if self.max_heap[i] < self.max_heap[left_child]:
+                    self.max_heap[i], self.max_heap[left_child] = self.max_heap[left_child], self.max_heap[i]
+                    i = left_child
             else:
                 break
+
 
 
 if __name__ == '__main__':
