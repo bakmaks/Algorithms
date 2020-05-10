@@ -9,7 +9,10 @@
 
 
 class MyBinaryHeap:
-    max_heap = []   # Куча с максимумом в корне.
+    """
+    # Куча с максимумом в корне.
+    """
+    max_heap = []
     heap_size = 0
 
     def get(self):
@@ -19,13 +22,18 @@ class MyBinaryHeap:
     def insert(self, x):
         self.max_heap.append(x)
         self.heap_size = len(self.max_heap)
+        # Исправление кучи вверх
         self.sift_up(self.heap_size - 1)
 
     def extract_max(self):
+        # Метод извлекает корневой элемент(самый большой)
         if self.heap_size > 1:
             root = self.max_heap[0]
+            # Извлечение последнего элемента т. к. он явно меньше корневого
+            # и замена им корневого элемента
             self.max_heap[0] = self.max_heap.pop()
             self.heap_size = len(self.max_heap)
+            # Исправление кучи вниз
             self.sift_down()
         elif self.heap_size == 1:
             root = self.max_heap.pop()
@@ -36,6 +44,11 @@ class MyBinaryHeap:
         return root
 
     def sift_up(self, i: int):
+        """
+        Метод исправляет кучу вверх, т. е. если родитель элемента меньше самого элемента,
+        они меняются местами. Элемент поднимается вверх на место родителя.
+        :param i: Позиция с которой начинается исправление
+        """
         while 0 < i < self.heap_size:
             parent = (i - 1) // 2
             if self.max_heap[i] > self.max_heap[parent]:
@@ -45,6 +58,12 @@ class MyBinaryHeap:
                 break
 
     def sift_down(self, i: int = 0):
+        """
+        Метод исправляет кучу вниз. Если дети элемента больше, то выбирается наибольший из них
+        и элемент опускается на место ребёнка, а ребёнок соответсвенно поднимается на верх
+        :param i: Позиция с которой начинается исправление
+        :return:
+        """
         while 0 <= i < self.heap_size:
             left_child = 2 * i + 1
             right_child = 2 * i + 2
