@@ -27,8 +27,11 @@ class MyBinaryHeap:
             self.max_heap[0] = self.max_heap.pop()
             self.heap_size = len(self.max_heap)
             self.sift_down()
+        elif self.heap_size == 1:
+            root = self.max_heap.pop()
+            self.heap_size = len(self.max_heap)
         else:
-            root = 0 if self.heap_size < 1 else self.max_heap[0]
+            root = 0
         # print(root)
         return root
 
@@ -74,8 +77,10 @@ if __name__ == '__main__':
     a = MyBinaryHeap()
     in_range = int(input('Введите диапазон: '))
     step = int(input('Введите шаг: '))
-    x = [i for i in range(in_range)]
+    x = [i for i in range(1000000, in_range, 10000)]
     rnd.shuffle(x)
+    print(x)
+    print(len(x))
     i = 0
     old_i = 0
     flag = True
