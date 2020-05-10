@@ -77,7 +77,7 @@ if __name__ == '__main__':
     a = MyBinaryHeap()
     in_range = int(input('Введите диапазон: '))
     step = int(input('Введите шаг: '))
-    x = [i for i in range(1000000, in_range, 10000)]
+    x = [i for i in range(in_range)]
     rnd.shuffle(x)
     print(x)
     print(len(x))
