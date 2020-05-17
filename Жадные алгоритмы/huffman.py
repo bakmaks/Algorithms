@@ -79,9 +79,8 @@ def huffman_coding(s):  # s = 'abacabad'
 
     l_keys = list(codes.keys())
 
-    encode_str = ''
-    for ch in s:
-        encode_str += codes[ch]
+    # Get encoded string
+    encode_str = ''.join([codes[ch] for ch in s])
 
     print(len_lst, len(encode_str))
     [print(x, codes[x], sep=': ') for x in sorted(l_keys)]
