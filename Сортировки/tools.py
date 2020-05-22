@@ -50,17 +50,22 @@ if __name__ == '__main__':
 
     # Проверка функций сортировки
     lists = [[], [1]]
-    for i in range(3, 1000, 100):
-        a = [x for x in range(i)]
-        rnd.shuffle(a)
+    for i in range(3, 1000, 100):   # 3, 100000, 10000
+        a = [rnd.randint(0, 1000000000) for x in range(i)]
         lists.append(a)
 
     lists = sorted(lists, key=len)
-
+    # Список функций для проверки.
+    # bubble_sort, selection_sort, insertion_sort, merge_sort, iter_merge_sort, hoar_sort
     function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, iter_merge_sort, hoar_sort]
 
     # test_sorts(function_lst, lists)
 
     compare(function_lst, lists, len(lists))
+
+    a = [rnd.randint(0, 1000000000) for i in range(100000)]
+
+    print(timed(iter_merge_sort, a, n_iter=10))
+
 
 

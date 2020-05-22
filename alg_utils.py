@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import time
 
 
-def timed(f, *args, n_iter=30):
+def timed(f, *args, n_iter=10):
     """
     Измеряет минимальное время выполнения функции f из n_iter вызовов.
     :param f: передаваемая функция
