@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     lists = sorted(lists, key=len)
 
-    function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, hoar_sort]
+    function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, iter_merge_sort, hoar_sort]
 
     # test_sorts(function_lst, lists)
 

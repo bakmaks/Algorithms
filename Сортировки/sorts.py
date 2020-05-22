@@ -1,3 +1,5 @@
+from collections import deque
+
 def bubble_sort(b: list):
     """
     Сортировка методом пузырька
@@ -106,6 +108,17 @@ def merge_sort(A):
     return merge(L, R)              # Возврат слитого, сортированного списка.
 
 ##################################################################################################################
+def iter_merge_sort(a):
+    sort_deque = deque(a)
+    while len(sort_deque) > 1:
+        one = sort_deque.popleft()
+        two = sort_deque.popleft()
+        one = one if type(one) is list else [one]
+        two = two if type(two) is list else [two]
+        sort_deque.append(merge(one, two))
+    return sort_deque.pop()
+
+##################################################################################################################
 
 def hoar_sort(A):
     if len(A) <= 1:
@@ -122,3 +135,6 @@ def hoar_sort(A):
     # Слияние отсортированных элементов
     return hoar_sort(L) + M + hoar_sort(R)
 
+x = [4,3,5,2,1]
+
+print(iter_merge_sort(x))
