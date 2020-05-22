@@ -84,7 +84,7 @@ def merge(A: list, B: list):
             C[n] = B[k]
             k += 1
 
-            count = len_a - i
+            count += len_a - i
 
         n += 1                      # Индекс временновго списка передв. вперёд на один эл.
     print('count', count)
