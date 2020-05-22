@@ -84,7 +84,7 @@ def merge(A: list, B: list):
             C[n] = B[k]
             k += 1
 
-            count += 1
+            count = len_a - i
 
         n += 1                      # Индекс временновго списка передв. вперёд на один эл.
     print('count', count)
@@ -122,8 +122,8 @@ def iter_merge_sort(a):
         two = sort_deque.popleft()
         one = one if type(one) is list else [one]
         two = two if type(two) is list else [two]
-        el, t_count = merge(one, two)
-        g_count += t_count
+        el, g_count = merge(one, two)
+
         sort_deque.append(el)
     print('g_count =', g_count)
     return [] if len(sort_deque) == 0 else sort_deque.pop()
@@ -145,6 +145,6 @@ def hoar_sort(A):
     # Слияние отсортированных элементов
     return hoar_sort(L) + M + hoar_sort(R)
 
-x = [1, 2, 3, 5, 4]
+x = [7, 6, 5, 4, 3, 2, 1]
 
 print(iter_merge_sort(x))
