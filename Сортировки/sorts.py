@@ -73,28 +73,22 @@ def merge(A: list, B: list):
     i = k = n = 0                       # Начальные индексы списков
     C = [0] * (len_a + len_b)           # Временный список
 
-    count = 0
-
     while i < len_a and k < len_b:      # Пока в том и др. списке есть эл.
         if A[i] <= B[k]:
             C[n] = A[i]                 # Во временный список заносится меньший эл.
             i += 1                      # Индекс списка с меньшим эл. переходит на следующий эл.
-
         else:
             C[n] = B[k]
             k += 1
-
-            count += len_a - i
-
         n += 1                      # Индекс временновго списка передв. вперёд на один эл.
-    print('count', count)
+
     while i < len_a:                    # Если в A или в B остались элементы
         C[n] = A[i]
         i += 1; n += 1
     while k < len_b:
         C[n] = B[k]
         k += 1; n += 1
-    return C, count
+    return C
 
 
 def merge_sort(A):
@@ -122,10 +116,7 @@ def iter_merge_sort(a):
         two = sort_deque.popleft()
         one = one if type(one) is list else [one]
         two = two if type(two) is list else [two]
-        el, g_count = merge(one, two)
-
-        sort_deque.append(el)
-    print('g_count =', g_count)
+        sort_deque.append(merge(one, two))
     return [] if len(sort_deque) == 0 else sort_deque.pop()
 
 ##################################################################################################################
@@ -144,7 +135,3 @@ def hoar_sort(A):
             R.append(x)
     # Слияние отсортированных элементов
     return hoar_sort(L) + M + hoar_sort(R)
-
-x = [7, 6, 5, 4, 3, 2, 1]
-
-print(iter_merge_sort(x))
