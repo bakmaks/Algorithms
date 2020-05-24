@@ -110,7 +110,6 @@ def merge_sort(A):
 ##################################################################################################################
 def iter_merge_sort(a):
     sort_deque = deque(a)
-    g_count = 0
     while len(sort_deque) > 1:
         one = sort_deque.popleft()
         two = sort_deque.popleft()

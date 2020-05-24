@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+from random import randint
 
 
 def get_inversions_with_bubble_sort(b: list):
@@ -14,15 +15,18 @@ def get_inversions_with_bubble_sort(b: list):
     while not_sorted:
         not_sorted = False
         for i in range(len(a) - 1):
-            if a[i] > a[i+1]:       # Попарное сравнение
+            if a[i] > a[i + 1]:  # Попарное сравнение
                 not_sorted = True
-                a[i], a[i+1] = a[i+1], a[i]     # обмен.
+                a[i], a[i + 1] = a[i + 1], a[i]  # обмен.
                 count += 1
     return a, count
+
 
 #######################################################################################################################
 
 def get_inversions_with_merge_sort(a: list):
+
+
     def merge(A: list, B: list):
         """
         Функция слияния двух сортированных списков. Попарно соавниваются эл. двух списков. Меньший эл. заносится
@@ -58,20 +62,19 @@ def get_inversions_with_merge_sort(a: list):
             k += 1;
             n += 1
         return C
+    sorting_deq = deque(a)
 
-    sort_deque = deque(a)
 
-    while len(sort_deque) > 1:
-        one = sort_deque.popleft()
-        two = sort_deque.popleft()
-        one = one if type(one) is list else [one]
-        two = two if type(two) is list else [two]
-        sort_deque.append(merge(one, two))
-    return [] if len(sort_deque) == 0 else sort_deque.pop()
+########################################################################################################################
 
 
 if __name__ == "__main__":
-    reader = (map(int, line.split(' ')) for line in sys.stdin)
-    a = list(next(reader))
-    _, c = get_inversions_with_bubble_sort(a)
-    print(c)
+    # print('введите список: ')
+    # reader = (map(int, line.split(' ')) for line in sys.stdin)
+    # a = list(next(reader))
+    # _, c = get_inversions_with_bubble_sort(a)
+    # print(c)
+    a = [randint(0,100) for i in range(7)]
+    print(a)
+    # a = [3,2,1]
+    print(get_inversions_with_merge_sort(a))
