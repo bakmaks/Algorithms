@@ -134,3 +134,9 @@ def hoar_sort(A):
             R.append(x)
     # Слияние отсортированных элементов
     return hoar_sort(L) + M + hoar_sort(R)
+
+
+if __name__ == '__main__':
+    x = list(map(int, '10 8'.split()))
+    print(x)
+    print(merge_sort(x))

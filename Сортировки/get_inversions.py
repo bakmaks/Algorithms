@@ -5,13 +5,14 @@ from random import randint
 
 def get_inversions_with_bubble_sort(b: list):
     """
+    Наивный алгоритм посчёта инверсий
     Сортировка методом пузырька
     :param b: Список
     :return: Сортированный список
     """
     a = b[:]
     not_sorted = True
-    count = 0
+    count = 0           # Счётчик инверсий
     while not_sorted:
         not_sorted = False
         for i in range(len(a) - 1):
@@ -23,22 +24,9 @@ def get_inversions_with_bubble_sort(b: list):
 
 
 #######################################################################################################################
-
-def get_inversions_with_merge_sort(a: list):
-
-
+Count = {'count': 0}    # Счётчик инверсий
+def get_inversions_with_merge_sort(A: list):
     def merge(A: list, B: list):
-        """
-        Функция слияния двух сортированных списков. Попарно соавниваются эл. двух списков. Меньший эл. заносится
-        во временный список. Индекс списка из которого эл. был перенесён во временный список сдвигается на
-        след. эл., у др. списка индекс остаётся неизменным, и соответсвенно увеличивается индекс
-        временного списка. Действия повторяются до тех пор, пока в одном из списсков не закончатся эл.
-        Оставшиеся эл. переносятся во временный список
-
-        :param A: список
-        :param B: список
-        :return: C список слитый из двух A и B
-        """
         len_a = len(A)
         len_b = len(B)
         i = k = n = 0  # Начальные индексы списков
@@ -51,6 +39,7 @@ def get_inversions_with_merge_sort(a: list):
             else:
                 C[n] = B[k]
                 k += 1
+                Count['count'] += (len_a - i)   # СЧЁТЧИК ИНВЕРСИЙ
             n += 1  # Индекс временновго списка передв. вперёд на один эл.
 
         while i < len_a:  # Если в A или в B остались элементы
@@ -62,8 +51,16 @@ def get_inversions_with_merge_sort(a: list):
             k += 1;
             n += 1
         return C
-    sorting_deq = deque(a)
 
+    len_a = len(A)
+    if len_a < 2:                   # Если только один эл.
+        return A[:]                 # возвращается копия
+
+    middle = len_a // 2             # Середина списка
+
+    L = get_inversions_with_merge_sort(A[:middle])      # Передаётся копия левой половины списка
+    R = get_inversions_with_merge_sort(A[middle:])      # Передаётся копия правой половины списка
+    return merge(L, R)              # Возврат слитого, сортированного списка.
 
 ########################################################################################################################
 
@@ -72,9 +69,12 @@ if __name__ == "__main__":
     # print('введите список: ')
     # reader = (map(int, line.split(' ')) for line in sys.stdin)
     # a = list(next(reader))
-    # _, c = get_inversions_with_bubble_sort(a)
+    # get_inversions_with_bubble_sort(a)
     # print(c)
-    a = [randint(0,100) for i in range(7)]
-    print(a)
-    # a = [3,2,1]
-    print(get_inversions_with_merge_sort(a))
+    # a = [randint(0,100) for i in range(7)]
+    # print(a)
+    # # a = [3,2,1]
+    # print(get_inversions_with_merge_sort(a))
+    x = list(map(int, '6 5 8 6 0 4'.split()))
+    get_inversions_with_merge_sort(x)
+    print(Count['count'])

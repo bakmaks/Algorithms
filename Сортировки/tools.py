@@ -59,13 +59,13 @@ if __name__ == '__main__':
     # bubble_sort, selection_sort, insertion_sort, merge_sort, iter_merge_sort, hoar_sort
     function_lst = [bubble_sort, selection_sort, insertion_sort, merge_sort, iter_merge_sort, hoar_sort]
 
-    # test_sorts(function_lst, lists)
+    test_sorts(function_lst, lists)
 
-    compare(function_lst, lists, len(lists))
-
-    a = [rnd.randint(0, 1000000000) for i in range(100000)]
-
-    print(timed(iter_merge_sort, a, n_iter=10))
+    # compare(function_lst, lists, len(lists))
+    #
+    # a = [rnd.randint(0, 1000000000) for i in range(100000)]
+    #
+    # print(timed(iter_merge_sort, a, n_iter=10))
 
 
 
