@@ -1,14 +1,10 @@
-import sys
-from collections import deque
-from random import randint
-
 
 def get_inversions_with_bubble_sort(b: list):
     """
     Наивный алгоритм посчёта инверсий
     Сортировка методом пузырька
     :param b: Список
-    :return: Сортированный список
+    :return: Сортированный список, кол-во инверсий.
     """
     a = b[:]
     not_sorted = True
