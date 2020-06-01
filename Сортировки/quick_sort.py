@@ -9,7 +9,6 @@ def partition(a, l, r):
     return j
 
 def quick_sort(A, l=0, r=0):
-
     r = r if r != 0 else len(A)
     if l >= r:
         return
