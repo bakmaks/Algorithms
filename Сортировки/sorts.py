@@ -109,14 +109,24 @@ def merge_sort(A):
 
 ##################################################################################################################
 def iter_merge_sort(a):
-    sort_deque = deque(a)
-    while len(sort_deque) > 1:
-        one = sort_deque.popleft()
-        two = sort_deque.popleft()
-        one = one if type(one) is list else [one]
-        two = two if type(two) is list else [two]
-        sort_deque.append(merge(one, two))
-    return [] if len(sort_deque) == 0 else sort_deque.pop()
+    """
+    Сортировка слиянием итеррациями
+    :param a: Не сортированный список
+    :return: Сортированный список
+    """
+
+    if len(a) < 2:
+        return a
+    else:
+        # Используется очередь из модуля collections
+        sort_deque = deque(a)
+        while len(sort_deque) > 1:
+            one = sort_deque.popleft()
+            two = sort_deque.popleft()
+            one = one if type(one) is list else [one]
+            two = two if type(two) is list else [two]
+            sort_deque.append(merge(one, two))
+        return sort_deque.pop()
 
 ##################################################################################################################
 
@@ -137,6 +147,9 @@ def hoar_sort(A):
 
 
 if __name__ == '__main__':
-    x = list(map(int, '10 8'.split()))
+    x = list(map(int, '10 2 67 4 3 89 56 45'.split()))
     print(x)
-    print(merge_sort(x))
+    print(iter_merge_sort(x))
+
+
+
