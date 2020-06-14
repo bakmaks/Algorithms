@@ -1,4 +1,5 @@
 import random
+from alg_utils import  timed
 
 
 def partition(a, l, r):
@@ -59,7 +60,16 @@ def quicksort(nums, fst=0, lst=None):
 
 if __name__ == '__main__':
     y = [7,3,5,6,2]
-    # quick_sort(y)
+    quick_sort(y)
     print(y)
     quicksort(y)
     print(y)
+    x = [ i for i in range(990)]
+    random.shuffle(x)
+    a = x[:]
+    if a == x:
+        print(True)
+    print(timed(quick_sort, x,100))
+    print(timed(quicksort, a,100))
+    if a == x:
+        print(True)
