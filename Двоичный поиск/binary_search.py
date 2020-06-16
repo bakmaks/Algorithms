@@ -3,7 +3,7 @@
 # и k натуральных чисел b_1,..., b_k, не превышающих 10^9. Для каждого i от 1 до k необходимо
 # вывести индекс 1 <= j <= n, для которого A[j]=b_i, или -1, если такого j нет.
 
-def binary_search(lst, el, index_one=True):
+def binary_search(lst, el, index_one=False):
     """
     ВЫводит индекс найденного элемента, или -1 , если элемент не найден.
     :param lst: список для поиска
@@ -15,7 +15,7 @@ def binary_search(lst, el, index_one=True):
     while l <= r:
         m = (l + r) // 2
         if A[m] == el:
-            return m+1 if index_one else m
+            return m if index_one else m+1
         elif A[m] > el:
             r = m - 1
         else:
