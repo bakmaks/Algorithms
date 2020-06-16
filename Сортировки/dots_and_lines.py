@@ -9,5 +9,12 @@ for i in range(n):
     lines.append(tuple(next(reader)))
 # print('Введите точки, через пробел:\n')
 dots = list(next(reader))
+lines.sort(key=lambda x: x[0])
 print(lines)
 print(dots)
+for dot in dots:
+    count = 0
+    for line in lines:
+        if line[0] <= dot <= line[1]:
+            count += 1
+    print(count, end=' ')
