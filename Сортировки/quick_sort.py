@@ -60,16 +60,11 @@ def quicksort(nums, fst=0, lst=None):
 
 if __name__ == '__main__':
     y = [7,3,5,6,2]
+    print('Y не сортированный:', y)
+    z = y[:]
     quick_sort(y)
-    print(y)
-    quicksort(y)
-    print(y)
-    x = [ i for i in range(990)]
-    random.shuffle(x)
-    a = x[:]
-    if a == x:
-        print(True)
-    print(timed(quick_sort, x,100))
-    print(timed(quicksort, a,100))
-    if a == x:
-        print(True)
+    print('Y сортированный:', y)
+    print('-'*50)
+    print('Z не сортированный:', z)
+    quicksort(z)
+    print('Z сортированный:', z)
