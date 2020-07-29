@@ -8,25 +8,26 @@
 # вторая — извлекает максимальное число и выводит его.
 
 
-class MyBinaryHeap:
+class MyMaxBinaryHeap:
     """
     # Куча с максимумом в корне.
     """
     max_heap = []
     heap_size = 0
 
-    def get(self):
-        # print(self.max_heap)
+    def get_max_heap(self):
+        """Возвращает список содержащий кучу"""
         return self.max_heap
 
     def insert(self, x):
+        """Вставляет элемент в кучу"""
         self.max_heap.append(x)
         self.heap_size = len(self.max_heap)
         # Исправление кучи вверх
         self.sift_up(self.heap_size - 1)
 
     def extract_max(self):
-        # Метод извлекает корневой элемент(самый большой)
+        """Метод извлекает корневой элемент(самый большой)"""
         if self.heap_size > 1:
             root = self.max_heap[0]
             # Извлечение последнего элемента т. к. он явно меньше корневого
@@ -40,7 +41,6 @@ class MyBinaryHeap:
             self.heap_size = len(self.max_heap)
         else:
             root = 0
-        # print(root)
         return root
 
     def sift_up(self, i: int):
@@ -65,7 +65,9 @@ class MyBinaryHeap:
         :return:
         """
         while 0 <= i < self.heap_size:
+            # позиция левого ребёнка
             left_child = 2 * i + 1
+            # позиция правого ребёнка
             right_child = 2 * i + 2
             if right_child < self.heap_size:
                 if self.max_heap[left_child] > self.max_heap[right_child]:
@@ -93,27 +95,37 @@ class MyBinaryHeap:
 
 if __name__ == '__main__':
     import random as rnd
-    a = MyBinaryHeap()
-    in_range = int(input('Введите диапазон: '))
-    step = int(input('Введите шаг: '))
+    a = MyMaxBinaryHeap()
+    print('Тест кучи.')
+    in_range = int(input('Введите длину списка: '))
+    step = int(input('Введите шаг проверки работы кучи: '))
     x = [i for i in range(in_range)]
     rnd.shuffle(x)
     print(x)
+    print('Длина списка')
     print(len(x))
     i = 0
     old_i = 0
-    flag = True
     for el in x:
         a.insert(el)
         i += 1
         if i == old_i + step:
-            max_el = max(a.get())
+            print('КУЧА:')
+            print(a.get_max_heap())
+            print('Максимальный эл. max(эл.):')
+            max_el = max(a.get_max_heap())
+            print(max_el)
+            print('Макасимальный эл. extract_max(эл.): ')
             max_ex_el = a.extract_max()
+            print(max_ex_el)
             if max_el != max_ex_el:
-                flag = False
+                print('ОШИБКА! На i-том шаге.')
                 print('i = ', i)
+                print('Эл. полученный с помощью ф. max() не равен эл. из ф. extract_max()')
                 print(f'max_el = %s, max_ex_el %s ' % (max_el, max_ex_el))
                 break
+            else:
+                print('Ok')
             old_i = i
 
 
@@ -126,11 +138,11 @@ if __name__ == '__main__':
     # a.insert(201)
     # a.insert(150)
     # a.insert(45)
-    # a.get()
+    # a.get_max_heap()
     # a.extract_max()
-    # a.get()
+    # a.get_max_heap()
     # a.extract_max()
-    # a.get()
+    # a.get_max_heap()
     # a.insert(250)
-    # a.get()
+    # a.get_max_heap()
 
