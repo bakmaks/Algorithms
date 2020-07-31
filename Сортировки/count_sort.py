@@ -19,6 +19,7 @@ def count_sort(A, m):
 
 
 if __name__ == '__main__':
+    # Ввод списка. (через пробел)
     reader = (map(int, line.split()) for line in sys.stdin)
     x = list(next(reader))
     print(x)
