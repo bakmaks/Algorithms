@@ -1,4 +1,22 @@
-def LIS(A: list, n: int):
+def LIS(A):
+    """
+    Дан список натуральных чисел A = [7,2,1,3,8,4,9,1,2,6,5,9,3,8,1]
+    найти длину наибольшей возрастающей последовательности для каждого A[i]
+    Вывести  в виде:
+    7 2 1 3 8 4 9 1 2 6 5 9 3 8 1  -- список натуральных чисел
+    1 1 1 2 3 3 4 1 2 4 4 5 3 5 1  -- список длин НВП для каждого A[i]
+    :param A: Список
+    """
+    n = len(A)
+    d = [1] * n     # Массив для запоминания длин каждого A[i]
+    for i in range(n):
+        for j in range(i):
+            if A[j] < A[i] and d[j] + 1 > d[i]:
+                d[i] = d[j] + 1
+    for i in range(n):
+        print(d[i], end=' ')
+
+def LIS1(A: list, n: int):
     """
     Дано целое число 1 ≤ n ≤ 10^3 и массив A[1…n] натуральных чисел, не превосходящих 2⋅10^9.
     Выведите максимальное 1 ≤ k ≤ n, для которого найдётся подпоследовательность 1 ≤ i1 < i2 < … < ik ≤ n
@@ -16,14 +34,15 @@ def LIS(A: list, n: int):
     d = [0] * n
     for i in range(n):
         d[i] = 1
-        for j in range(0, i-1):
-            if A[j] < A[i] and d[j] + 1 > d[i]:
+        for j in range(i):
+            if A[i] % A[j] == 0 and d[j] + 1 > d[i]:
                 d[i] = d[j] + 1
     for i in range(n):
-        print(max(ans, d[i]), end=' ')
-
+        # print(d[i], end=' ')
+        ans = max(ans, d[i])
+    print(ans)
 
 if __name__ == '__main__':
-    n = int(input())
-    x = list(map(int, input().split()))
-    LIS(x, n)
+    n = 4
+    x = [3,6,7,12]
+    LIS1(x, n)      # 3
