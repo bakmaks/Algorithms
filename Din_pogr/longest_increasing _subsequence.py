@@ -7,14 +7,17 @@ def LIS(A):
     1 1 1 2 3 3 4 1 2 4 4 5 3 5 1  -- список длин НВП для каждого A[i]
     :param A: Список
     """
+    print(*A)
     n = len(A)
     d = [1] * n     # Массив для запоминания длин каждого A[i]
+    # В каждом элементе d[i] запоминается длина НВП для A[i]
     for i in range(n):
         for j in range(i):
             if A[j] < A[i] and d[j] + 1 > d[i]:
                 d[i] = d[j] + 1
     for i in range(n):
         print(d[i], end=' ')
+    print()
 
 def LIS1(A: list, n: int):
     """
@@ -30,6 +33,7 @@ def LIS1(A: list, n: int):
     :param A: Список
     :param n: Длина списка
     """
+    print(*A)
     ans = 0
     d = [0] * n
     for i in range(n):
@@ -43,6 +47,8 @@ def LIS1(A: list, n: int):
     print(ans)
 
 if __name__ == '__main__':
+    LIS([7, 2, 1, 3, 8, 4, 9, 1, 2, 6, 5, 9, 3, 8, 1])
+    print()
     n = 4
     x = [3,6,7,12]
     LIS1(x, n)      # 3
